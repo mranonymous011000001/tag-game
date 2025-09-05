@@ -4250,7 +4250,19 @@ return o?o["rms"]:0},SampleRate(){return this._sampleRate},CurrentTime(){if(self
 
 }
 
-class C3DummyPlugin {}
+// A harmless placeholder for a removed plugin to prevent crashes.
+class C3DummyPlugin {
+    constructor() { }
+    Release() { }
+    OnCreate() { }
+    IsSingleGlobal() { return false; }
+    IsWorldType() { return false; }
+    HasEffects() { return false; }
+    MustPreDraw() { return false; }
+}
+
+C3DummyPlugin.Instance = class extends self.C3.SDKInstanceBase { constructor() { super(...arguments); } Release() {} };
+C3DummyPlugin.Type = class extends self.C3.SDKTypeBase { constructor() { super(...arguments); } Release() {} };
 
 
 
@@ -5445,3 +5457,4 @@ self.C3_ExpressionFuncs = [
 
 
 }
+
